@@ -1,0 +1,18 @@
+body {
+    font-family: Arial, sans-serif;
+    background: url(https://ilovewallpaper.com/cdn/shop/files/1-SpotsandDots-Multicoloured_ILW50355_Thumbnail_WEB_1be4f78f-919b-4042-947f-0ce3202649ee.webp?v=1705932803);
+  }
+  
+  #quizPage {
+    margin-top: 20px;
+  }
+  
+  #questionContainer {
+    margin-bottom: 20px;
+  }
+  
+  #scoreContainer {
+    font-weight: bold;
+    font-size: 1.2em;
+  }
+  
