@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>League of Legends</title>
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@6.1.1/dist/aframe-extras.min.js"></script>
+    <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+    }
+
+    button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      margin-top: 20px;
+      margin-left: 150px;
+    }
+    button img {
+      width: 120px;
+      transition: transform 0.2s;
+    }
+    button img:hover {
+      transform: scale(1.1);
+    }
+    
+    #volume-control {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            border-radius: 5px;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        input[type="range"] {
+            width: 300px;
+        }
+
+        .popup {
+      display: none;
+      position: fixed;
+      width: fit-content;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      z-index: 9999;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      font-size: x-large;
+    }
+
+    .popup h2 {
+      margin: 0;
+      margin-bottom: 10px;
+    }
+
+    .popup p {
+      margin: 10px 0;
+    }
+
+    .popup button {
+      background: red;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      justify-content: center;
+      margin-right:145px ;
+      width: 25%;
+      font-size: x-large;
+      
+      }
+
+    .popup button:hover {
+      background: darkred;
+    }
+
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 9998;
+    }
+     
+  </style>
+  </head>
+  <body>
+
+   
+
+    <div class="popup" id="popup">
+      <h2 id="popup-title"></h2>
+      <p id="popup-content"></p>
+      <button onclick="closePopup()">Close</button>
+    </div>
+    <div class="overlay" id="overlay" onclick="closePopup()"></div>
+
+    <a-scene>
+
+      <a-entity id="background-music" sound="src: url(model/videoplayback.m4a); autoplay: true; loop: true; volume: 0.5"></a-entity>
+
+      <a-sky src="img/111179-689949805_large.mp4" radius="1000"
+        rotation="0 -90 0"></a-sky>
+
+      <!-- ตัวละคร Darius -->
+      <a-entity
+        gltf-model="model/darius.glb"
+        position="-120 0 -204"
+        scale="0.011 0.011 0.011"
+        animation-mixer="clip: *"
+        id="darius">
+      </a-entity>
+      <a-text value="Darius" position="-120 3 -204" align="center"
+        color="black"></a-text>
+
+      <!-- ตัวละคร yasuo -->
+      <a-entity
+        rotation="0 180 0"
+        gltf-model="model/yasuo.glb"
+        position="270 0 -370"
+        scale="0.010 0.010 0.010"
+        animation-mixer="clip: *"
+        id="yasuo">
+      </a-entity>
+      <a-text value="ํYasuo" position="250 3 -330" align="center"
+        color="black"></a-text>
+
+      <a-entity
+        gltf-model="model/arcane_commander_caitlyn.glb"
+        position="-1 0 -6"
+        scale="0.009 0.009 0.009"
+        animation-mixer="clip: *"
+        id="caitlyn">
+      </a-entity>
+      <a-text value="Caitlyn" position="-1 3 -6" align="center"
+        color="black"></a-text>
+
+      <a-entity
+        gltf-model="model/arcane_fractured_jinx.glb"
+        position="1 0 -6"
+        scale="0.009 0.009 0.009"
+        animation-mixer="clip: *"
+        id="Jinx">
+      </a-entity>
+      <a-text value="Jinx" position="1 3 -6" align="center"
+        color="black"></a-text>
+
+      <a-entity
+        gltf-model="model/garen.glb"
+        position="-590 0 -144"
+        scale="0.012 0.012 0.012"
+        animation-mixer="clip: *"
+        id="garen">
+      </a-entity>
+      <a-text value="Garen" position="-590 3 -144" align="center"
+        color="black"></a-text>
+
+      <a-entity
+        gltf-model="model/azir.glb"
+        position="-80 0 246"
+        scale="0.011 0.011 0.011"
+        animation-mixer="clip: *"
+        id="Azir">
+      </a-entity>
+      <a-text value="Azir" position="-80 3 246" align="center" color="black"
+        border: solid ;></a-text>
+
+      <!-- พื้น -->
+      <a-plane
+        gltf-model="model/runeterra_3d_map.glb"
+        rotation="0 0 0"
+        position="0 -70 -5" rotation="0 0 0" scale="1000 1000 1000">
+      </a-plane>
+
+      <!-- แสง -->
+      <a-light type="directional" position="0 10 5" intensity="8"
+        color="#ffffff"></a-light>
+      <a-light type="ambient" color="#555"></a-light>
+
+      <!-- กล้อง -->
+      <a-camera id="camera" position="0 1.6 0">
+        <a-cursor></a-cursor>
+      </a-camera>
+
+      <!-- เป้าหมายสำหรับวาร์ป -->
+      <a-box id="noxus" position="-120 0 -200" color="#FF5733" scale="1 0.2 1">
+        <img src="./img/download (1).png" alt></a-box>
+      <a-box id="iona" position="270 0.5 -366" color="#33C3FF"
+        scale="1 0.2 1"></a-box>
+      <a-box id="piltover" position="-1 0 -3" color="#33C3FF"
+        scale="1 0.2 1"></a-box>
+      <a-box id="zaun" position="1 0 -3" color="#33C3FF"
+        scale="1 0.2 1"></a-box>
+      <a-box id="demacia" position="-590 0.5 -140" color="#33C3FF"
+        scale="1 0.2 1"></a-box>
+      <a-box id="shurima" position="-80 0.5 250" color="#33C3FF"
+        scale="1 0.2 1"></a-box>
+    </a-scene>
+
+    <div style="position: absolute; top: 20px; left: 20px; right: 20px; ">
+      <button onclick="warpTo('noxus')">
+
+        <h1 style="color: red; ">Noxus</h1>
+        <img
+          src="https://universe.leagueoflegends.com/images/noxus_crest_icon.png"
+          alt="Warp to Target 1">
+      </button>
+      <button onclick="warpTo('iona')">
+        <h1 style="color: palevioletred;">Ionia</h1>
+        <img
+          src="https://universe.leagueoflegends.com/images/iona_crest_icon.png"
+          alt="Warp to Target 2">
+      </button>
+      <button onclick="warpTo('piltover ')">
+        <h1 style="color: rgb(46, 222, 228);">Piltover</h1>
+        <img
+          src="https://universe.leagueoflegends.com/images/piltover_crest_icon.png"
+          alt="Warp to Target 3">
+      </button>
+      <button onclick="warpTo('zaun')">
+        <h1 style="color: greenyellow;">Zaun</h1>
+        <img
+          src="https://universe.leagueoflegends.com/images/zaun_crest_icon.png"
+          alt="Warp to Target 4">
+      </button>
+      <button onclick="warpTo('demacia')">
+        <h1 style="color: yellow;">Demacia</h1>
+        <img
+          src="https://universe.leagueoflegends.com/images/demacia_crest_icon.png"
+          alt="Warp to Target 5" style="width: 70px;">
+      </button>
+      <button onclick="warpTo('shurima')">
+        <h1 style="color: orange;">Shurima</h1>
+        <img
+          src="https://universe.leagueoflegends.com/images/shurima_crest_icon.png"
+          alt="Warp to Target 6">
+      </button>
+    </div>
+    <div id="volume-control">
+      <label for="volume-slider">Volume:</label>
+      <input id="volume-slider" type="range" min="0" max="1" step="0.1"
+        value="0.5">
+    </div>
+
+    <script>
+   
+   function openPopup(title, content) {
+      document.getElementById('popup-title').innerText = title;
+      document.getElementById('popup-content').innerText = content;
+      document.getElementById('popup').style.display = 'block';
+      document.getElementById('overlay').style.display = 'block';
+    }
+
+    // ฟังก์ชันปิด Popup
+    function closePopup() {
+      document.getElementById('popup').style.display = 'none';
+      document.getElementById('overlay').style.display = 'none';
+    }
+
+    // เพิ่ม Event Listener ให้โมเดล
+    document.querySelector('#darius').addEventListener('click', () => {
+      openPopup('Darius', 'ในจักรวรรดิ ไม่ว่าใครก็สามารถก้าวขึ้นสู่ความมีอำนาจได้ ไม่ว่าพวกเขาจะเป็นใคร มีวัฒนธรรมและเบื้องหลังอย่างไร ไม่มีใครที่ยอมรับในความคิดนี้อย่างเร่าร้อนรุนแรงมากไปกว่า Darius จากผู้เริ่มต้นแสนต่ำต้อย เขาได้เลื่อนขั้นด้วยความเร็ว เขามักจะยึดมั่นในหน้าที่มากกว่าทุกสิ่ง และได้รับการยอมรับในเรื่องของความดุเดือดและความมีวินัย รวมถึงการไม่ยอมที่จะถอยหลัง ในสนามรบที่เต็มไปด้วยเลือดของ Dalamor Plain เขายังกล้าที่จะตัดหัวนายพลชาว Noxus เพราะว่าไอ้ขี้ขลาดคนนั้นออกคำสั่งให้ถอยทัพ จากนั้นเขาร้องตะโกนและชูขวานโชกเลือดของเขาขึ้น รวบรวมกองทัพที่กำลังจะแตกพ่ายให้มารวมกันและเอาชนะได้แม้จะมีจำนวนที่น้อยกว่าศัตรูหลายเท่าเขาได้รับการตบรางวัลให้เป็นผู้บังคับบัญชา มีผู้คนมากมายจากทั่วทั้งจักรวรรดิต้องการเข้าร่วมในกองกำลังของเขา ซึ่งส่วนใหญ่จะถูก Darius ปฏิเสธ เขาจะยอมรับแต่ผู้ที่แข็งแกร่งที่สุด มีวินัยมากที่สุด และมีความเจตจำนงค์ดั่งเหล็กหล้าเท่านั้น และด้วยความน่าเกรงขามของเขา มันไม่ใช่เรื่องแปลกเลยที่จะเห็นเมืองทั้งเมืองยอมแพ้เพียงเพราะว่าเห็นธงของเขา');
+    });
+
+    document.querySelector('#yasuo').addEventListener('click', () => {
+      openPopup('Yasuo', 'เมื่อตอนเป็นเด็ก ยาสุโอะมักจะเชื่อสิ่งที่คนอื่นๆ ในหมู่บ้านพูดเกี่ยวกับตัวเขาซึ่งก็คือว่า อย่างดีที่สุดเขาก็เป็นเพียงวิจารณญาณที่ผิดพลาด และอย่างร้ายที่สุดก็คือเขาคือความผิดพลาดที่ไม่อาจแก้ไขได้เช่นเดียวกับความเจ็บปวดส่วนมาก ในนั้นก็มีความจริงบางอย่างอยู่ แม่ของเขาเป็นหญิงม่ายซึ่งมีลูกชายวัยเด็กอยู่แล้วหนึ่งคนในตอนที่ชายซึ่งจะกลายมาเป็นพ่อของยาสุโอะผ่านเข้ามาในชีวิตของนางราวกับสายลมฤดูใบไม้ร่วง และก็เช่นเดียวกับฤดูแสนเหงานั้น เขาได้จากไปอีกครั้งตั้งแต่ฤดูหนาวของไอโอเนียยังไม่ทันแผ่เข้าปกคลุมครอบครัวเล็กๆ นี้แม้ว่าโยเนะผู้เป็นพี่ชายต่างบิดาของยาสุโอะจะเป็นทุกอย่างที่แตกต่างจากยาสุโอะ ทั้งน่าเคารพ รอบคอบและมีมโนธรรม แต่ทั้งคู่กลับสนิทสนมตัวติดกันชนิดที่แยกจากกันไม่ได้ เมื่อเด็กๆ คนอื่นแกล้งยาสุโอะ โยเนะจะคอยช่วยปกป้องเขาเสมอ แม้ยาสุโอะจะขาดความอดทน แต่เขาก็นิสัยแน่วแน่มุ่งมั่นมาชดเชย เมื่อโยเนะเริ่มฝากตัวเป็นศิษย์ฝึกหัดที่สำนักดาบชื่อดังของหมู่บ้าน เด็กน้อยยาสุโอะก็ตามไปรออยู่ด้านนอกสำนักท่ามกลางสายฝนฤดูมรสุมจนกระทั่งบรรดาอาจารย์ใจอ่อนยอมเปิดประตูให้โอกาสให้เขายาสุโอะแสดงให้เห็นถึงพรสวรรค์ที่ติดตัวมาตามธรรมชาติซึ่งเป็นสิ่งที่สร้างความหงุดหงิดให้บรรดาเพื่อนใหม่ร่วมสำนักของเขาเป็นอย่างมาก เขาเป็นศิษย์เพียงคนเดียวที่ซึ่งผู้เฒ่าซูม่ายอดปรมาจารย์แห่งวิชาดาบวายุในตำนานคนสุดท้ายให้ความสนใจ ผู้เฒ่าเล็งเห็นศักยภาพของยาสุโอะ แต่ทว่าลูกศิษย์ผู้หุนหันพลันแล่นกลับปฏิเสธไม่รับการสอนวิชาจากเขาและยังคงนิสัยพยศคะนองดั่งพายุหมุน โยเนะร้องขอน้องชายให้ละทิ้งความหยิ่งทะนงตนและได้มอบเมล็ดต้นเมเปิ้ลซึ่งเป็นบทเรียนขั้นสูงสุดว่าด้วยความอ่อนน้อมถ่อมตนของสำนักให้น้องชายเป็นของขวัญ เช้าวันรุ่งขึ้น ยาสุโอะตกลงยอมรับตำแหน่งศิษย์และผู้คุ้มกันส่วนตัวของผู้เฒ่าซูม่า');
+    });
+    document.querySelector('#caitlyn').addEventListener('click', () => {
+      openPopup('Caitlyn', 'ด้วยเกิดมาในวงศ์วานพ่อค้าวาณิชที่มั่งคั่งและมีอิทธิพล เคทลิน คิรัมแมนจึงได้เรียนรู้มารยาทการวางตัวในสังคมของพิลโทเวอร์ตั้งแต่เล็ก แต่เธอกลับชอบใช้เวลาส่วนใหญ่ในพื้นที่ป่าดงพงไพรนอกเขตพิลโทเวอร์มากกว่า นอกจากจะเข้าสังคมสังสรรค์กับชนชั้นสูงผู้มั่งคั่งในเมืองแห่งความก้าวหน้าได้เป็นอย่างดีแล้ว เธอยังช่ำชองในด้านการตามรอยกวางตามพื้นดินเลนกลางป่า อีกทั้งยังสามารถแกะรอยติดตามนกที่กำลังเหินเวหาอยู่เหนือย่านร้านค้าหรือยิงทะลวงตากระต่ายป่าด้วยปืนคาบศิลายิงต่อเนื่องของผู้เป็นบิดาได้แม้อยู่ห่างไปนับร้อยก้าวอย่างไรก็ดี คุณสมบัติอันวิเศษที่สุดของเคทลินคือความชาญฉลาดของเธอและความตั้งใจที่จะเรียนรู้สิ่งต่างๆ จากพ่อและแม่ซึ่งคอยเน้นย้ำให้เธอตระหนักแยกแยะสิ่งที่ถูกและผิดได้ แม้จะมีชีวิตที่เพียบพร้อมด้วยความสะดวกสบายและอภิสิทธิ์ แม่ของเธอเป็นหนึ่งในผู้คุมบัญชีระดับสูงสุดแห่งตระกูลคิรัมแมนและคอยเตือนเคทลินอยู่เสมอว่าเสน่ห์เย้ายวนใจของพิลโทเวอร์และโอกาสอันเรืองรองของเมืองนี้อาจทำให้แม้แต่ดวงใจที่เปี่ยมเมตตาที่สุดก็ยังแข็งกระด้างขึ้นได้ ในตอนแรก เคทลินแทบไม่ใส่ใจ เพราะสำหรับเธอแล้ว พิลโทเวอร์คือเมืองแห่งความงดงามและความสงบเรียบร้อยที่ทำให้เธอชื่นใจในทุกครั้งที่เดินทางกลับมาจากแดนป่า');
+    });
+    document.querySelector('#Jinx').addEventListener('click', () => {
+      openPopup('Jinx', 'แม้คนส่วนใหญ่มองจิงซ์แล้วจะเห็นแค่สาวสติเพี้ยนที่พกพาสารพัดอาวุธสุดอันตรายเต็มตัว แต่ก็มีบางคนที่ยังจำได้ว่าเธอคือเด็กสาวที่ออกจะไร้เดียงสาจากแดนซอน หรือนักประดิษฐ์ดัดแปลงที่ดูจะอยู่ผิดที่ผิดทางจึงไม่ค่อยเข้ากับคนรอบข้างสักเท่าไร ไม่มีใครรู้แน่ชัดว่าเกิดสิ่งใดที่ทำให้เด็กสาวผู้อ่อนหวานคนนี้กลายเป็นตัวแสบที่มีชื่อกระฉ่อนว่าเป็นจอมทำลายล้างสร้างความพินาศ แต่พอจิงซ์เปิดตัวในพิลโทเวอร์แบบเปรี้ยงปร้าง พรสวรรค์อันโดดเด่นในการสร้างความวุ่นวายในบ้านเมืองส่งผลให้เธอขึ้นแท่นเป็นบุคคลระดับตำนานในทันทีจิงซ์เริ่มมีชื่อเสียงเป็นครั้งแรกจากการ "แกล้ง" ชาวเมืองพิลโทเวอร์แบบไม่เปิดเผยตัว… โดยเน้นกลุ่มคนที่สัมพันธ์ข้องเกี่ยวกับตระกูลพ่อค้าผู้มั่งคั่ง การแกล้งของเธอมีตั้งแต่ระดับสร้างความเดือดร้อนรำคาญใจไล่ไปจนถึงเรื่องร้ายแรงระดับอาชญากรรม ในวันแห่งความก้าวหน้า เธอจัดการปล่อยฝูงสัตว์แปลกๆ ต่างถิ่นจากกรงขังของเคานต์เมให้ออกมาเพ่นพานขวางถนนทั่วเมือง อีกทั้งยังทำให้ธุรกิจการค้าในเมืองต้องสะดุดไปหลายสัปดาห์ด้วยการวางระเบิดเพลิงพลังทำลายล้างตามสะพานสำคัญๆ ของเมือง ครั้งหนึ่งเธอยังถึงกับจัดแจงสลับตำแหน่งป้ายชื่อถนนทั้งหมดในเมืองจนเกิดความสับสนอย่างสุดขีดกันไปทั่วแม้ว่าเป้าหมายการโจมตีของจอมสร้างปัญหารายนี้จะดูเหมือนไม่มีความเจาะจง และแรงจูงใจก็ไม่ได้มีอะไรมากกว่าแค่ต้องการสร้างความโกลาหล แต่ทุกสิ่งที่เธอทำกลับส่งผลให้ความคึกคักที่ดำเนินไปภายใต้ระบบระเบียบของบ้านเมืองต้องสะดุดหยุดกึกลงทุกครั้งไป');
+    });
+    document.querySelector('#garen').addEventListener('click', () => {
+      openPopup('Garen', 'จากชาติกำเนิดอันสูงส่งแห่งตระกูลคราวน์การ์ดอันทรงเกียรติ เช่นกันกับลักซ์น้องสาวของเขา กาเร็นรับรู้ได้ตั้งแต่วัยเยาว์ว่าเขาจะต้องถูกคาดหวังให้ทุ่มเททั้งชีวิตเพื่อพิทักษ์ราชบัลลังก์แห่งเดมาเซีย บิดาของเขา พิเอเตอร์ คือนายทหารผู้ประดับยศอันโอ่อ่า ในขณะที่ป้าของเขา เทียนน่า คือผู้บัญชาการดาบแห่งหน่วยทะลวงฟันหัวใจสิงห์อันไร้เทียมทาน—และทั้งคู่ก็เป็นบุคคลที่ราชาจาร์วานที่สามให้ความนับถืออย่างใหญ่หลวง เพราะอย่างนั้น กาเร็นก็เลยถูกมองว่าจะต้องเป็นผู้ที่คอยรับใช้อยู่เคียงข้างบุตรของราชาในลักษณะเดียวกันอย่างแน่นอนอาณาจักรเดมาเซียนั้นผงาดขึ้นมาจากซากเถ้าถ่านแห่งสงครามรูน และก็ยังต้องถูกกัดเซาะด้วยความขัดแย้งและการสู้รบมาตลอดนับศตวรรษหลังจากนั้น ลุงคนหนึ่งของกาเร็น ผู้เป็นหนึ่งในอัศวินพรานแห่งกองทัพเดมาเซีย เคยเล่าให้กาเร็นและลักซ์ในวัยเด็กฟังถึงเรื่องราวเมื่อครั้งที่เขาได้เดินทางออกไปยังดินแดนนอกกำแพงของอาณาจักร เพื่อปกป้องผู้คนของเดมาเซียจากภยันตรายที่อยู่ในโลกภายนอกนั้นเขาเตือนเด็กทั้งสองว่า วันหนึ่ง จะมีบางสิ่งที่เข้ามายุติความสงบสุขในช่วงเวลานี้ลงอย่างไม่ต้องสงสัย—มันอาจจะเป็นพวกจอมเวทนอกกฏหมาย สัตว์ร้ายแห่งห้วงอเวจี หรือสิ่งน่าสยดสยองที่ไม่อาจจินตนาการถึงซึ่งยังคงไม่เคยปรากฏตัวขึ้นก็ได้');
+    });
+    document.querySelector('#Azir').addEventListener('click', () => {
+      openPopup('Azir', 'Azir เป็นเพียงจักรพรรดิองค์หนึ่งแห่ง Shurima ในอดีตอันไกลโพ้น เขาคือชายผู้ทระนงตนว่าเกือบได้รับชีวิตที่เป็นนิรันดร์ ความโอหังของเขาทำให้เขาถูกทรยศและฆ่าตายขณะที่กำลังฉลองชัยชนะอันยิ่งใหญ่ แต่ตอนนี้เมื่อเวลาผ่านไปนับพันปี เขาได้ถือกำเนิดใหม่ในฐานะเทพผู้ทรงพลัง เมื่อเมืองที่ถูกฝังของเขาผุดขึ้นจากทราย Azir ตั้งใจที่จะนำพา Shurima กลับสู่ความรุ่งเรืองเฉกเช่นวันวานหลายพันปีที่แล้ว อาณาจักร Shurima คือดินแดนที่แผ่กิ่งก้านสาขารวบรวมรัฐน้อยใหญ่ที่ถูกพิชิตโดยกองทัพอันแข็งแกร่งซึ่งนำโดยเทพเจ้านักรบผู้ไร้เทียมทาน Shurima ถูกปกครองโดยจักรพรรดิที่มีความทะเยอทะยานและกระหายอำนาจจนกลายเป็นอาณาจักรที่ยิ่งใหญ่ที่สุดในช่วงเวลานั้น แผ่นดินที่อุดมสมบูรณ์แห่งนี้ได้รับพลังแห่งแสงอาทิตย์ ที่ส่องจากแผ่นจานทองคำเหนือวิหาร ณ ใจกลางเมืองหลวงAzir บุตรชายคนสุดท้องซึ่งเป็นที่โปรดปรานน้อยที่สุดขององค์จักรพรรดิไม่เคยถูกลิขิตให้เป็นใหญ่ เขาไม่มีทางจะได้ขึ้นเป็นจักรพรรดิเพราะมีพี่ชายหลายพระองค์อยู่ก่อนหน้า มีแนวโน้มว่า เขาคงจะทำได้เพียงกุมตำแหน่งใดตำแหน่งหนึ่งในสมณเพศหรือไม่ก็เป็นผู้ว่าราชการจังหวัดหลังเขา เขาเป็นเด็กชายร่างผอมบางที่คงแก่เรียน ผู้ใช้เวลาส่วนใหญ่กับการอ่านหนังสือในห้องสมุดอันยิ่งใหญ่ของ Nasus มากกว่าฝึกซ้อมวิธีสู้ภายใต้การดูแลของเทวาวีรบุรุษ Renekton ท่ามกลางชั้นหยึกหยักที่เต็มไปด้วยม้วนกระดาษ หนังสือ และแผ่นจารึก Azir พบกับเด็กชายผู้เป็นทาสที่มายังห้องสมุดเป็นประจำทุกวันเพื่อค้นหาตำราที่เจ้านายต้องการ ทาสใน Shurima ถูกห้ามไม่ให้ใช้ชื่อ ทว่าเมื่อเด็กชายทั้งสองกลายเป็นเพื่อนกัน Azir ก็แหกกฎบ้านกฎเมืองข้อนี้ และตั้งชื่อเพื่อนใหม่ของเขาว่า Xerath ซึ่งแปลว่า "ผู้ให้" เขาแต่งตั้ง Xerath ให้เป็นทาสส่วนพระองค์แม้ต้องระมัดระวังที่จะไม่เรียกชื่อในที่สาธารณะ และเด็กชายทั้งสองก็แบ่งปันความรักในประวัติศาสตร์ โดยพยายามเรียนทุกอย่างเกี่ยวกับอดีตของ Shurima และตำนานเกี่ยวกับเทวาวีรบุรุษ');
+    });
+
+
+
+    
+
+    // ฟังก์ชันวาร์ป
+    function warpTo(targetId) {
+      const target = document.querySelector(`#${targetId}`);
+      const camera = document.querySelector('#camera');
+      const targetPosition = target.getAttribute('position');
+
+      // เปลี่ยนตำแหน่งของกล้อง
+      camera.setAttribute('position', `${targetPosition.x} 1.6 ${targetPosition.z}`);
+    }
+     
+      
+      // อ้างอิงถึง A-Frame entity ที่มีเสียง
+        const musicEntity = document.querySelector('#background-music');
+        const volumeSlider = document.querySelector('#volume-slider');
+
+        // ปรับระดับเสียงเมื่อเลื่อน slider
+        volumeSlider.addEventListener('input', function () {
+            musicEntity.setAttribute('sound', 'volume', this.value);
+        });
+            // Debug ชื่อแอนิเมชัน
+    document.querySelector('a-entity').addEventListener('model-loaded', function(e) {
+      const animations = e.detail.model.animations;
+      console.log('Animations:', animations.map(a => a.name));
+    });
+    </script>
+  </body>
+</html>
