@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LoL Quiz App</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@3.7.4/dist/vuetify.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@3.7.4/dist/vuetify.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Teko:wght@500&display=swap');
+        body {
+            /* background: linear-gradient(135deg, #0a0a2a, #001f3f);  */
+            /* background-color: #ffaa00; */
+            /* background-attachment: fixed; */
+            background-image: url(./img/SEA_ServerMerge_Header_1600x900.jpg) !important;
+            color: #fff;
+            font-family: 'Teko', sans-serif; 
+            font-optical-sizing: auto;
+            font-weight: 500;
+            font-style: normal;
+            font-size: xx-large !important;
+        }
+
+        /* Navbar */
+        .v-app-bar {
+            background: rgba(0, 0, 0, 0.9) ;
+            border-bottom: 2px solid #ffd700; /* ขอบทอง */
+        }
+
+        /* ปรับ Card */
+        .v-card {
+            background: rgba(20, 20, 40, 0.9) ;
+            border: 2px solid #ffaa00; /* ขอบทอง */
+            box-shadow: 0px 0px 15px rgba(255, 170, 0, 0.5);
+            color: #fff;
+        }
+
+        /* ปรับปุ่ม */
+        .v-btn {
+            background: linear-gradient(135deg, #ffaa00, #cc7a00);
+            color: black ;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(255, 170, 0, 0.5);
+        }
+
+        .v-btn:hover {
+            background: linear-gradient(135deg, #ffcc00, #ffaa00);
+            box-shadow: 0px 0px 15px rgba(255, 200, 50, 0.8);
+        }
+
+        /* ปรับสีตัวเลือก */
+        .v-radio-group .v-radio {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 8px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .v-radio-group .v-radio:hover {
+            background: rgba(255, 215, 0, 0.3); 
+        }
+
+        /* เมื่อเลือกแล้ว */
+        .v-radio-group .v-radio.selected {
+            background: #1976D2;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        /* คำถาม */
+        .questions h3 {
+            color: #ffd700;
+            font-size: 24px;
+            text-shadow: 2px 2px 5px rgba(255, 170, 0, 0.8);
+        }
+
+        /* ส่วนแสดงผลลัพธ์ */
+        .result-card {
+            background: rgba(20, 20, 50, 0.9) ;
+            border: 3px solid #ffd700;
+            box-shadow: 0px 0px 20px rgba(255, 215, 0, 0.7);
+        }
+        
+        .score-display {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ffd700;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+        }
+        
+        .question-review {
+            border-left: 3px solid #ffaa00;
+            padding-left: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .correct-answer {
+            color: #4caf50;
+            font-weight: bold;
+        }
+        
+        .wrong-answer {
+            color: #f44336;
+            text-decoration: line-through;
+        }
+        
+        /* .v-expansion-panels {
+            background: transparent !important;
+        } */
+        
+        .v-expansion-panel {
+            background: rgba(30, 30, 60, 0.8) ;
+            border-radius: 8px !important;
+            margin-bottom: 10px;
+            border: 1px solid #ffaa00;
+        }
+        
+        .v-expansion-panel-title {
+            color: #ffd700 ;
+        }
+        
+        .v-expansion-panel-text {
+            color: #fff ;
+        }
+    </style>
+</head>
+<body >
+    <div id="app">
+        <v-app>
+            <v-container class="mt-5" fluid>
+                <v-app-bar app color="black" dark>
+                    <v-toolbar-title>League Quiz</v-toolbar-title>
+                    <v-spacer></v-spacer>
+                    <v-btn text @click="goHome">หน้าแรก</v-btn>
+                    <v-btn text @click="goProfile">โปรไฟล์</v-btn>
+                </v-app-bar>
+
+                <!-- หน้าเริ่มต้น -->
+                <div v-if="!quizStarted">
+                    <v-row class="mt-12" justify="center">
+                        <v-col cols="12" md="6">
+                            <v-card class="pa-5" elevation="5">
+                                <v-card-title class="text-center">
+                                    <h3>ยินดีต้อนรับสู่ LoL Quiz!</h3>
+                                </v-card-title>
+                                <v-card-actions class="justify-center">
+                                    <v-btn color="primary" @click="startQuiz" large>เริ่มทำแบบทดสอบ</v-btn>
+                                </v-card-actions>
+                            </v-card>
+                        </v-col>
+                    </v-row>
+                </div>
+
+                <!-- หน้าคำถาม -->
+                <div v-else-if="!quizFinished">
+                    <v-row class="mt-12" justify="center">
+                        <v-col cols="12" md="8">
+                            <v-card class="pa-5" elevation="4">
+                                <v-card-title>
+                                    <h2>คำถามที่ {{ currentQuestionIndex + 1 }}/{{ questions.length }}</h2>
+                                </v-card-title>
+                                <v-card-subtitle class="text-start">
+                                    <div class="questions">
+                                        <h3>{{ currentQuestion.question }}</h3>
+                                    </div>
+                                </v-card-subtitle>
+                                <v-radio-group v-model="selectedAnswer" class="mt-3" @change="onAnswerChange">
+                                    <v-radio v-for="(choice, index) in currentQuestion.choices" :key="index"
+                                        :label="choice" :value="choice"
+                                        :class="{ selected: selectedAnswer === choice }">
+                                        <template v-slot:label>
+                                            <v-icon v-if="selectedAnswer === choice" color="green">mdi-check-circle</v-icon>
+                                            {{ choice }}
+                                        </template>
+                                    </v-radio>
+                                </v-radio-group>
+                                <v-card-actions class="justify-center mt-4">
+                                    <v-btn @click="prevQuestion" :disabled="currentQuestionIndex === 0" color="primary">ย้อนกลับ</v-btn>
+                                    <v-btn v-if="currentQuestionIndex < questions.length - 1" @click="nextQuestion" color="primary">ถัดไป</v-btn>
+                                    <v-btn v-else @click="finishQuiz" color="success">ตรวจคำตอบ</v-btn>
+                                </v-card-actions>
+                                
+                                <!-- แสดงความคืบหน้า -->
+                                <v-progress-linear
+                                    v-model="progress"
+                                    color="amber"
+                                    height="10"
+                                    striped
+                                    class="mt-4"
+                                ></v-progress-linear>
+                            </v-card>
+                        </v-col>
+                    </v-row>
+                </div>
+                
+                <!-- หน้าแสดงผลคะแนนและเฉลย -->
+                <div v-else>
+                    <v-row class="mt-12" justify="center">
+                        <v-col cols="12" md="8">
+                            <v-card class="pa-5 result-card" elevation="6">
+                                <v-card-title class="text-center">
+                                    <h2>ผลคะแนนของคุณ</h2>
+                                </v-card-title>
+                                
+                                <v-card-text class="text-center">
+                                    <div class="score-display">
+                                        {{ score }} / {{ questions.length }}
+                                    </div>
+                                    <v-divider class="my-4"></v-divider>
+                                    
+                                    <div class="text-h5 mb-4">เฉลยคำตอบ</div>
+                                    
+                                    <v-expansion-panels>
+                                        <v-expansion-panel
+                                            v-for="(question, index) in questions"
+                                            :key="index"
+                                        >
+                                            <v-expansion-panel-title>
+                                                <div>
+                                                    <strong>คำถามที่ {{ index + 1 }}:</strong>
+                                                    <v-icon 
+                                                        :color="answers[index] === question.answer ? 'success' : 'error'"
+                                                        class="ml-2"
+                                                    >
+                                                        {{ answers[index] === question.answer ? 'mdi-check-circle' : 'mdi-close-circle' }}
+                                                    </v-icon>
+                                                </div>
+                                            </v-expansion-panel-title>
+                                            <v-expansion-panel-text>
+                                                <div class="question-review">
+                                                    <div class="text-h6 mb-2">{{ question.question }}</div>
+                                                    
+                                                    <div class="mb-2">
+                                                        <strong>คำตอบที่ถูกต้อง:</strong> 
+                                                        <span class="correct-answer">{{ question.answer }}</span>
+                                                    </div>
+                                                    
+                                                    <div>
+                                                        <strong>คำตอบของคุณ:</strong> 
+                                                        <span :class="answers[index] === question.answer ? 'correct-answer' : 'wrong-answer'">
+                                                            {{ answers[index] || 'ไม่ได้ตอบ' }}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </v-expansion-panel-text>
+                                        </v-expansion-panel>
+                                    </v-expansion-panels>
+                                </v-card-text>
+                                
+                                <v-card-actions class="justify-center mt-4">
+                                    <v-btn color="primary" @click="restartQuiz">เริ่มเล่นอีกครั้ง</v-btn>
+                                    <v-btn color="secondary" @click="goHome">กลับหน้าหลัก</v-btn>
+                                </v-card-actions>
+                            </v-card>
+                        </v-col>
+                    </v-row>
+                </div>
+            </v-container>
+        </v-app>
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+        const { createVuetify } = Vuetify;
+
+        const vuetify = createVuetify();
+
+        createApp({
+            data() {
+                return {
+                    quizStarted: false,
+                    quizFinished: false,
+                    currentQuestionIndex: 0,
+                    questions: [],
+                    selectedAnswer: null,
+                    answers: [],
+                    score: 0
+                };
+            },
+            computed: {
+                currentQuestion() {
+                    return this.questions[this.currentQuestionIndex];
+                },
+                progress() {
+                    return ((this.currentQuestionIndex + 1) / this.questions.length) * 100;
+                }
+            },
+            methods: {
+                async startQuiz() {
+                    try {
+                        const response = await fetch('quiz.json');
+                        const data = await response.json();
+                        this.questions = data.questions;
+                        this.answers = new Array(this.questions.length).fill(null);
+                        this.quizStarted = true;
+                        this.quizFinished = false;
+                        this.currentQuestionIndex = 0;
+                        this.score = 0;
+                        this.selectedAnswer = null;
+                    } catch (error) {
+                        console.error("Error loading quiz data:", error);
+                        alert("ไม่สามารถโหลดข้อมูลแบบทดสอบได้");
+                    }
+                },
+                nextQuestion() {
+                    if (!this.selectedAnswer) {
+                        alert("กรุณาเลือกคำตอบก่อนถัดไป");
+                        return;
+                    }
+                    this.answers[this.currentQuestionIndex] = this.selectedAnswer;
+                    this.selectedAnswer = null;
+                    
+                    if (this.currentQuestionIndex < this.questions.length - 1) {
+                        this.currentQuestionIndex++;
+                      
+                        if (this.answers[this.currentQuestionIndex]) {
+                            this.selectedAnswer = this.answers[this.currentQuestionIndex];
+                        }
+                    }
+                },
+                prevQuestion() {
+                    this.currentQuestionIndex--;
+                    this.selectedAnswer = this.answers[this.currentQuestionIndex] || null;
+                },
+                onAnswerChange() {
+                    this.answers[this.currentQuestionIndex] = this.selectedAnswer;
+                },
+                finishQuiz() {
+                   
+                    // if (!this.selectedAnswer) {
+                    //     alert("กรุณาเลือกคำตอบก่อนตรวจคำตอบ");
+                    //     return;
+                    // }
+                    
+                 
+                    this.answers[this.currentQuestionIndex] = this.selectedAnswer;
+                    
+                 
+                    this.calculateScore();
+                  
+                    this.quizFinished = true;
+                },
+                calculateScore() {
+                    this.score = 0;
+                    for (let i = 0; i < this.questions.length; i++) {
+                        if (this.answers[i] === this.questions[i].answer) {
+                            this.score++;
+                        }
+                    }
+                },
+                restartQuiz() {
+                    this.quizStarted = false;
+                    this.quizFinished = false;
+                    this.currentQuestionIndex = 0;
+                    this.selectedAnswer = null;
+                    this.answers = [];
+                    this.score = 0;
+                    this.$nextTick(() => {
+                        this.startQuiz();
+                    });
+                },
+                goHome() {
+                    this.quizStarted = false;
+                    this.quizFinished = false;
+                },
+                goProfile() {
+                    
+                    alert("ระบบโปรไฟล์ยังไม่เปิดให้บริการ");
+                }
+            },
+            mounted() {
+              
+                document.title = "League of Legends Quiz";
+            }
+        }).use(vuetify).mount('#app');
+    </script>
+</body>
+</html>

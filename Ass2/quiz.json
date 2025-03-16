@@ -1,0 +1,105 @@
+{
+    "quiz_title": "แบบทดสอบ LOL",
+    "questions": [
+        {
+          "question": "แชมเปี้ยนตัวใดที่มีท่าอัลติเมทที่สามารถเทเลพอร์ตไปที่ใดก็ได้บนแผนที่?",
+          "choices": ["A) Twisted Fate", "B) Shen", "C) Pantheon", "D) Galio"],
+          "answer": "A) Twisted Fate"
+        },
+        {
+          "question": "ไอเทมใดที่ให้ความสามารถในการมองเห็นวอร์ดที่มองไม่เห็น?",
+          "choices": ["A) Control Ward", "B) Stealth Ward", "C) Oracle Lens", "D) Farsight Alteration"],
+          "answer": "C) Oracle Lens"
+        },
+        {
+          "question": "ตำแหน่งใดในเกม League of Legends ที่มีหน้าที่หลักในการสนับสนุนเพื่อนร่วมทีม?",
+          "choices": ["A) Top", "B) Jungle", "C) Mid", "D) Support"],
+          "answer": "D) Support"
+        },
+        {
+          "question": "มังกรตัวใดที่ให้โบนัสความเสียหายแบบ True Damage?",
+          "choices": ["A) Cloud Drake", "B) Infernal Drake", "C) Mountain Drake", "D) Ocean Drake"],
+          "answer": "B) Infernal Drake"
+        },
+        {
+          "question": "แชมเปี้ยนตัวใดที่มีท่าที่สามารถสร้างกำแพงกั้นทางเดินได้?",
+          "choices": ["A) Anivia", "B) Taliyah", "C) Trundle", "D) ถูกทุกข้อ"],
+          "answer": "D) ถูกทุกข้อ"
+        },
+          {
+          "question": "ไอเทมใดที่เพิ่มความเร็วในการโจมตีและความเสียหายคริติคอล?",
+          "choices": ["A) Infinity Edge", "B) Phantom Dancer", "C) Rapid Firecannon", "D) Statikk Shiv"],
+          "answer": "A) Infinity Edge"
+        },
+          {
+          "question": "แชมเปี้ยนตัวใดที่สามารถแปลงร่างเป็นมังกรได้?",
+          "choices": ["A) Shyvana", "B) Aurelion Sol", "C) Swain", "D) Malphite"],
+          "answer": "A) Shyvana"
+        },
+          {
+          "question": "ตำแหน่งใดในเกม League of Legends ที่มีหน้าที่หลักในการฟาร์มป่า?",
+          "choices": ["A) Top", "B) Jungle", "C) Mid", "D) ADC"],
+          "answer": "B) Jungle"
+        },
+          {
+          "question": "มังกรตัวใดที่ให้โบนัสเกราะและความต้านทานเวทย์?",
+          "choices": ["A) Cloud Drake", "B) Infernal Drake", "C) Mountain Drake", "D) Ocean Drake"],
+          "answer": "C) Mountain Drake"
+        },
+          {
+          "question": "แชมเปี้ยนตัวใดที่มีท่าที่สามารถสร้างพายุทอร์นาโดได้?",
+          "choices": ["A) Janna", "B) Yasuo", "C) Ziggs", "D) Vayne"],
+          "answer": "A) Janna"
+        },
+          {
+          "question": "ไอเทมใดที่ให้ความสามารถในการฟื้นฟูพลังชีวิตและมานา?",
+          "choices": ["A) Redemption", "B) Mikael's Blessing", "C) Spirit Visage", "D) Warmog's Armor"],
+          "answer": "A) Redemption"
+        },
+          {
+          "question": "แชมเปี้ยนตัวใดที่สามารถขโมยท่าอัลติเมทของแชมเปี้ยนตัวอื่นได้?",
+          "choices": ["A) Sylas", "B) Viego", "C) Neeko", "D) Zoe"],
+          "answer": "A) Sylas"
+        },
+          {
+          "question": "ตำแหน่งใดในเกม League of Legends ที่มีหน้าที่หลักในการสร้างความเสียหายทางกายภาพ?",
+          "choices": ["A) Top", "B) Jungle", "C) Mid", "D) ADC"],
+          "answer": "D) ADC"
+        },
+          {
+          "question": "มังกรตัวใดที่ให้โบนัสความเร็วในการเคลื่อนที่?",
+          "choices": ["A) Cloud Drake", "B) Infernal Drake", "C) Mountain Drake", "D) Ocean Drake"],
+          "answer": "A) Cloud Drake"
+        },
+          {
+          "question": "แชมเปี้ยนตัวใดที่มีท่าที่สามารถสร้างหลุมดำได้?",
+          "choices": ["A) Orianna", "B) Syndra", "C) Veigar", "D) Bard"],
+          "answer": "A) Orianna"
+        },
+          {
+          "question": "ไอเทมใดที่ให้ความสามารถในการลบล้างสถานะผิดปกติ?",
+          "choices": ["A) Quicksilver Sash", "B) Zhonya's Hourglass", "C) Banshee's Veil", "D) Guardian Angel"],
+          "answer": "A) Quicksilver Sash"
+        },
+          {
+          "question": "แชมเปี้ยนตัวใดที่สามารถปลอมตัวเป็นแชมเปี้ยนตัวอื่นได้?",
+          "choices": ["A) Neeko", "B) LeBlanc", "C) Shaco", "D) Vladimir"],
+          "answer": "A) Neeko"
+        },
+          {
+          "question": "ตำแหน่งใดในเกม League of Legends ที่มีหน้าที่หลักในการสร้างความเสียหายเวทย์?",
+          "choices": ["A) Top", "B) Jungle", "C) Mid", "D) Support"],
+          "answer": "C) Mid"
+        },
+          {
+          "question": "มังกรตัวใดที่ให้โบนัสการฟื้นฟูพลังชีวิตและมานา?",
+          "choices": ["A) Cloud Drake", "B) Infernal Drake", "C) Mountain Drake", "D) Ocean Drake"],
+          "answer": "D) Ocean Drake"
+        },
+          {
+          "question": "แชมเปี้ยนตัวใดที่มีท่าที่สามารถสร้างกับดักเห็ดได้?",
+          "choices": ["A) Teemo", "B) Caitlyn", "C) Jhin", "D) Ziggs"],
+          "answer": "A) Teemo"
+        }
+      ]
+}
