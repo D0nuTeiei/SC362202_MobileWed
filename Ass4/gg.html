@@ -1,0 +1,83 @@
+<html>
+    <head>
+        <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.5.2/dist/aframe-extras.min.js"></script>
+        <style>
+            body {
+                margin: 0;
+                overflow: hidden;
+            }
+            .backgroundVideo{
+                background-color: aquamarine;
+                color: aqua;
+            }
+        </style>
+    </head>
+    <body>
+        <a-scene>
+
+            <a-sky src="./img/vecteezy_ai-generated-spaceship-futuristic-interior-with-view-on_38233376.jpg"rotation="0 150 0"></a-sky>
+
+    
+            <a-box id="profile-button" position="0 1 -2" width="5" height="0.5" depth="0.1" color="#3498db" shadow="cast: true"
+                event-set__mouseenter="scale: 1.2 1.2 1.2; color: #2980b9"
+                event-set__mouseleave="scale: 2 1 1; color: #3498db">
+                <a-text value="CLICK ENTER BUTTON" align="center" position="0 0 0.1" color="#fff" scale="1.5 1.5 1.5"></a-text>
+         
+            </a-box>
+
+           
+            <a-plane id="profile-window" position="0 0 -30" width="5" height="3" color="#47454d" visible="false" material="opacity: 0.9"
+                animation__show="property: position; to: 0 2 -3; dur: 500; startEvents: show"
+                animation__hide="property: position; to: 0 0 -3; dur: 500; startEvents: hide">
+                <a-text value="Personal Information" position="0 0.89 0.1" align="center" color="#fff" scale="1.5 1.5 1.5"></a-text>
+                <a-image src="./img/hq720.jpg" position="-1.5 0 0.1" width="1" height="1" material="opacity: 1"></a-image>
+                <a-text value="Name: Thanisorn Khamsing" position="0.4 0.3 0.1" align="center" color="#fff"></a-text>
+                <a-text value="StdID: 663380162-7" position="0.4 0 0.1" align="center" color="#fff"></a-text>
+                <a-text value="Hobby: Game, Movie, Music" position="0.39 -0.3 0.1" align="center" color="#fff"></a-text>
+                <a-box position="0 -0.7 0.1" width="0.6" height="0.2" depth="0.1" color="red"
+                    event-set__mouseenter="color: #c0392b" event-set__mouseleave="color: #e74c3c"
+                    onclick="toggleProfile()">
+                    <a-text value="Close" align="center" position="0 0 0.1" width="2" color="#ffffff" scale="1.2 1.2 1.2"></a-text>
+                </a-box>
+            </a-plane>
+        </a-scene>
+
+        <script>
+            const profileButton = document.getElementById('profile-button');
+            const profileWindow = document.getElementById('profile-window');
+
+            function toggleProfile() {
+            const isVisible = profileWindow.getAttribute('visible');
+
+                if (isVisible) {
+                    profileWindow.emit('hide'); 
+                    setTimeout(() => {
+                        profileWindow.setAttribute('visible', false);
+                        profileButton.setAttribute('visible', true);
+                        profileButton.emit('slide-up'); 
+                    }, 500); 
+                } else {
+                    profileWindow.setAttribute('visible', true);
+                    profileWindow.emit('show'); 
+                    
+                    
+                    profileButton.emit('slide-down'); 
+                    setTimeout(() => {
+                        profileButton.setAttribute('visible', false);
+                    }, 300);
+                }
+            }   
+
+
+
+            profileButton.addEventListener('click', toggleProfile);
+
+            document.addEventListener('keydown', (event) => {
+                if (event.key === ' ' || event.key === 'Enter') {
+                    toggleProfile();
+                }
+            });
+        </script>
+    </body>
+</html>
