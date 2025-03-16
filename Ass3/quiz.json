@@ -1,0 +1,106 @@
+[
+    {
+        "title": "ใครเป็นผู้กำกับภาพยนตร์เรื่อง Inception?",
+        "options": ["Steven Spielberg", "Christopher Nolan", "James Cameron", "Quentin Tarantino"],
+        "answer": 2
+    },
+    {
+        "title": "ตัวละครหลักใน The Matrix มีชื่อว่าอะไร?",
+        "options": ["Morpheus", "Trinity", "Neo", "Agent Smith"],
+        "answer": 3
+    },
+    {
+        "title": "ใครรับบทเป็น Iron Man ในจักรวาลภาพยนตร์ Marvel?",
+        "options": ["Chris Hemsworth", "Robert Downey Jr.", "Mark Ruffalo", "Chris Evans"],
+        "answer": 2
+    },
+    {
+        "title": "ภาพยนตร์เรื่องใดได้รับรางวัลออสการ์สาขาภาพยนตร์ยอดเยี่ยมในปี 2020?",
+        "options": ["1917", "Joker", "Parasite", "Once Upon a Time in Hollywood"],
+        "answer": 3
+    },
+    {
+        "title": "ตัวละคร Joker ปรากฏตัวในภาพยนตร์เรื่องใดเป็นครั้งแรก?",
+        "options": ["Batman (1966)", "Batman (1989)", "The Dark Knight", "Joker (2019)"],
+        "answer": 2
+      },
+      {
+        "title": "ใครเป็นผู้ให้เสียงพากย์ Woody ใน Toy Story?",
+        "options": ["Tim Allen", "Tom Hanks", "Billy Crystal", "Robin Williams"],
+        "answer": 2
+      },
+      {
+        "title": "ภาพยนตร์แอนิเมชันเรื่องแรกของดิสนีย์คือเรื่องอะไร?",
+        "options": ["Cinderella", "Snow White and the Seven Dwarfs", "Sleeping Beauty", "Pinocchio"],
+        "answer": 2
+      },
+      {
+        "title": "The Lord of the Rings: The Return of the King คว้ารางวัลออสการ์ไปทั้งหมดกี่รางวัล?",
+        "options": ["9", "10", "11", "12"],
+        "answer": 3
+      },
+      {
+        "title": "ภาพยนตร์แนวไซไฟเรื่องใดที่มีประโยคเด็ดว่า I'll be back?",
+        "options": ["Blade Runner", "The Matrix", "The Terminator", "RoboCop"],
+        "answer": 3
+      },
+      {
+        "title": "ตัวละครหลักใน Pirates of the Caribbean มีชื่อว่าอะไร?",
+        "options": ["Will Turner", "Jack Sparrow", "Davy Jones", "Hector Barbossa"],
+        "answer": 2
+      },
+      {
+        "title": "ภาพยนตร์เรื่อง Interstellar มีธีมหลักเกี่ยวกับอะไร?",
+        "options": ["หุ่นยนต์", "การเดินทางข้ามอวกาศและมิติเวลา", "ซอมบี้", "อาชญากรรม"],
+        "answer": 2
+      },
+      {
+        "title": "ใครเป็นผู้กำกับภาพยนตร์เรื่อง Pulp Fiction?",
+        "options": ["Christopher Nolan", "Quentin Tarantino", "Martin Scorsese", "Steven Spielberg"],
+        "answer": 2
+      },
+      {
+        "title": "ภาพยนตร์ที่ทำรายได้สูงสุดตลอดกาล (ไม่นับเงินเฟ้อ) คือเรื่องใด?",
+        "options": ["Titanic", "Avengers: Endgame", "Avatar", "The Lion King"],
+        "answer": 3
+      },
+      {
+        "title": "ตัวละคร Thanos ปรากฏตัวครั้งแรกในจักรวาล Marvel ในภาพยนตร์เรื่องใด?",
+        "options": ["Iron Man", "The Avengers", "Guardians of the Galaxy", "Thor: Ragnarok"],
+        "answer": 2
+      },
+      {
+        "title": "เพลงประกอบภาพยนตร์ Frozen ที่โด่งดังมากคือเพลงอะไร?",
+        "options": ["Into the Unknown", "Do You Want to Build a Snowman?", "Let It Go", "Love Is an Open Door"],
+        "answer": 3
+      },
+      {
+        "title": "ใครรับบทเป็น James Bond' ใน 'Casino Royale (2006)?",
+        "options": ["Sean Connery", "Daniel Craig", "Pierce Brosnan", "Roger Moore"],
+        "answer": 2
+      },
+      {
+        "title": "ภาพยนตร์เรื่อง The Godfather มีทั้งหมดกี่ภาค?",
+        "options": ["2", "3", "4", "5"],
+        "answer": 2
+      },
+      {
+        "title": "ตัวละคร Darth Vader ปรากฏตัวครั้งแรกในภาพยนตร์ Star Wars ภาคใด?",
+        "options": ["The Empire Strikes Back", "Return of the Jedi", "A New Hope", "Revenge of the Sith"],
+        "answer": 3
+      },
+      {
+        "title": "ตัวละคร ซอง จิน อู ตัวเอกในเรื่อง Squid Game มีหมายเลยประจําตัวคือ?",
+        "options": ["456", "123", "1", "99"],
+        "answer": 1
+      },
+      {
+        "title": "ตัวละคร Rick Sanchez ตัวหลักในเรื่อง Rick&Morty มาจากจักรวาลใด?",
+        "options": ["c-137", "666", "a-456", "love-69"],
+        "answer": 1
+      }
+    
+]
+
+
+  
